@@ -3,8 +3,8 @@
   --c1: #ffa94d; --c1-dark: #c1610b; /* orange */
   --c2: #ffe066; --c2-dark: #c99a04; /* yellow */
   --c3: #69db7c; --c3-dark: #2f9e44; /* green */
-  --c4: #66d9e8; --c4-dark: #0c8599; /* teal */
-  --c5: #74c0fc; --c5-dark: #1864ab; /* blue */
+  --c4: #3fd8c7; --c4-dark: #0f9488; /* teal, pushed toward green-cyan */
+  --c5: #3b82f6; --c5-dark: #1d4ed8; /* blue, pushed toward a more saturated indigo-blue */
   --c6: #b197fc; --c6-dark: #6741d9; /* purple */
 
   --bg: #14171f;
