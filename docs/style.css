@@ -1,7 +1,7 @@
 :root {
   --c0: #ff6b6b; --c0-dark: #b32d2d; /* red */
-  --c1: #ffa94d; --c1-dark: #c1610b; /* orange */
-  --c2: #ffe066; --c2-dark: #c99a04; /* yellow */
+  --c1: #ff8c1a; --c1-dark: #b35f00; /* orange, pushed toward red for separation from yellow */
+  --c2: #dcf91f; --c2-dark: #7a8a00; /* yellow, pushed toward yellow-green for separation from orange */
   --c3: #69db7c; --c3-dark: #2f9e44; /* green */
   --c4: #3fd8c7; --c4-dark: #0f9488; /* teal, pushed toward green-cyan */
   --c5: #3b82f6; --c5-dark: #1d4ed8; /* blue, pushed toward a more saturated indigo-blue */
@@ -48,7 +48,34 @@ html, body {
   margin-bottom: 14px;
 }
 
+.logo-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 48px;
+}
+
+.logo-ring {
+  position: absolute;
+  inset: 0;
+  animation: logoSpin 24s linear infinite;
+}
+
+.logo-ball {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin: -6px;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
 .topbar h1 {
+  position: relative;
+  z-index: 1;
   font-size: 28px;
   margin: 0;
   letter-spacing: 2px;
@@ -249,6 +276,11 @@ html, body {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.14); }
+}
+
+@keyframes logoSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes popOut {
