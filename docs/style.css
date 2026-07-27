@@ -49,33 +49,25 @@ html, body {
 }
 
 .logo-wrap {
-  position: relative;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 18px 48px;
+  gap: 5px;
 }
 
-.logo-ring {
-  position: absolute;
-  inset: 0;
-  animation: logoSpin 24s linear infinite;
+.logo-row {
+  display: flex;
+  gap: 6px;
 }
 
 .logo-ball {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  margin: -6px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
 
 .topbar h1 {
-  position: relative;
-  z-index: 1;
   font-size: 28px;
   margin: 0;
   letter-spacing: 2px;
@@ -276,11 +268,6 @@ html, body {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.14); }
-}
-
-@keyframes logoSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 @keyframes popOut {
