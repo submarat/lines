@@ -1,6 +1,11 @@
 :root {
-  --c5: #74c0fc; /* accent blue, used for header/button gradients */
-  --c6: #b197fc; /* accent purple, used for header/button gradients */
+  --c0: #ff6b6b; --c0-dark: #b32d2d; /* red */
+  --c1: #ffa94d; --c1-dark: #c1610b; /* orange */
+  --c2: #ffe066; --c2-dark: #c99a04; /* yellow */
+  --c3: #69db7c; --c3-dark: #2f9e44; /* green */
+  --c4: #66d9e8; --c4-dark: #0c8599; /* teal */
+  --c5: #74c0fc; --c5-dark: #1864ab; /* blue */
+  --c6: #b197fc; --c6-dark: #6741d9; /* purple */
 
   --bg: #14171f;
   --panel: #1c2130;
@@ -154,22 +159,21 @@ html, body {
   animation: shake 0.3s ease;
 }
 
-.ball, .preview-dot {
-  background-image: url('balls.png');
-  background-repeat: no-repeat;
-  background-size: 1000% 1400%; /* 10 frame columns x 14 colour/state rows */
-}
-
 .ball {
-  width: 82%;
-  height: 82%;
+  width: 76%;
+  height: 76%;
+  border-radius: 50%;
+  box-shadow: inset -4px -4px 8px rgba(0,0,0,0.35), inset 3px 3px 6px rgba(255,255,255,0.35), 0 2px 4px rgba(0,0,0,0.4);
   pointer-events: none;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45));
 }
 
 .ball.selected {
   animation: pulse 0.6s ease-in-out infinite;
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.45)) drop-shadow(0 0 6px rgba(255,255,255,0.85));
+  box-shadow: inset -4px -4px 8px rgba(0,0,0,0.35), inset 3px 3px 6px rgba(255,255,255,0.45), 0 0 0 3px rgba(255,255,255,0.6), 0 0 10px 2px rgba(255,255,255,0.5);
+}
+
+.ball.popping {
+  animation: popOut 0.28s ease forwards;
 }
 
 .ball.spawning {
@@ -177,11 +181,21 @@ html, body {
 }
 
 .preview-dot {
-  width: 42%;
-  height: 42%;
-  opacity: 0.45;
+  width: 34%;
+  height: 34%;
+  border-radius: 50%;
+  opacity: 0.4;
   pointer-events: none;
 }
+
+/* Ball colours */
+.color-0 { background: radial-gradient(circle at 32% 28%, #fff 0%, var(--c0) 45%, var(--c0-dark) 100%); }
+.color-1 { background: radial-gradient(circle at 32% 28%, #fff 0%, var(--c1) 45%, var(--c1-dark) 100%); }
+.color-2 { background: radial-gradient(circle at 32% 28%, #fff 0%, var(--c2) 45%, var(--c2-dark) 100%); }
+.color-3 { background: radial-gradient(circle at 32% 28%, #fff 0%, var(--c3) 45%, var(--c3-dark) 100%); }
+.color-4 { background: radial-gradient(circle at 32% 28%, #fff 0%, var(--c4) 45%, var(--c4-dark) 100%); }
+.color-5 { background: radial-gradient(circle at 32% 28%, #fff 0%, var(--c5) 45%, var(--c5-dark) 100%); }
+.color-6 { background: radial-gradient(circle at 32% 28%, #fff 0%, var(--c6) 45%, var(--c6-dark) 100%); }
 
 .hint {
   max-width: 520px;
@@ -235,6 +249,11 @@ html, body {
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.14); }
+}
+
+@keyframes popOut {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.15); opacity: 0; }
 }
 
 @keyframes popIn {

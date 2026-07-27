@@ -202,24 +202,15 @@
         const k = key(r, c);
         if (color !== null) {
           const ball = document.createElement('div');
-          ball.className = 'ball';
+          ball.className = `ball color-${color}`;
           if (selected && selected.r === r && selected.c === c) ball.classList.add('selected');
-          if (clearingSet && clearingSet.has(k)) {
-            ball.dataset.mode = 'pop';
-            ball.dataset.row = String(N_COLORS + color); // pop rows follow the 7 idle rows
-            ball.dataset.start = String(performance.now());
-          } else {
-            ball.dataset.mode = 'idle';
-            ball.dataset.row = String(color);
-            if (spawningSet && spawningSet.has(k)) ball.classList.add('spawning');
-          }
+          if (clearingSet && clearingSet.has(k)) ball.classList.add('popping');
+          if (spawningSet && spawningSet.has(k)) ball.classList.add('spawning');
           cell.appendChild(ball);
         } else if (nextPositions.some((p, i) => p && p.r === r && p.c === c)) {
           const idx = nextPositions.findIndex((p) => p && p.r === r && p.c === c);
           const dot = document.createElement('div');
-          dot.className = 'preview-dot';
-          dot.dataset.mode = 'static';
-          dot.dataset.row = String(nextColors[idx]);
+          dot.className = `preview-dot color-${nextColors[idx]}`;
           cell.appendChild(dot);
         }
       }
@@ -227,35 +218,6 @@
     scoreEl.textContent = score;
     bestEl.textContent = localStorage.getItem(BEST_KEY) || '0';
   }
-
-  // Sprite sheet: 10 animation-frame columns x 14 rows (colours 0-6 idle,
-  // colours 7-13 = same colours popping). Positions are percentages so the
-  // sheet scales responsively with the ball element's own rendered size.
-  const SPRITE_COLS = 10;
-  const SPRITE_ROWS = 14;
-  const IDLE_FPS = 20;
-  const POP_FPS = 40;
-
-  function spriteTick(now) {
-    const idleFrame = Math.floor(now / (1000 / IDLE_FPS)) % SPRITE_COLS;
-    document.querySelectorAll('.ball, .preview-dot').forEach((el) => {
-      const mode = el.dataset.mode;
-      const row = Number(el.dataset.row);
-      let frame;
-      if (mode === 'pop') {
-        const elapsed = now - Number(el.dataset.start);
-        frame = Math.min(SPRITE_COLS - 1, Math.floor(elapsed / (1000 / POP_FPS)));
-      } else if (mode === 'static') {
-        frame = 0;
-      } else {
-        frame = idleFrame;
-      }
-      el.style.backgroundPositionX = `${(frame / (SPRITE_COLS - 1)) * 100}%`;
-      el.style.backgroundPositionY = `${(row / (SPRITE_ROWS - 1)) * 100}%`;
-    });
-    requestAnimationFrame(spriteTick);
-  }
-  requestAnimationFrame(spriteTick);
 
   async function flashPath(path) {
     const perStep = 40;
