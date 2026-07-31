@@ -16,6 +16,30 @@ Click a ball, then click an empty tile to move it there through a clear path. Li
 balls of the same colour — in a row, column, or diagonal — to clear them and score. Every move that
 doesn't clear a line adds 3 more balls. Don't let the board fill up.
 
+## AI engine and simulator
+
+The browser game now includes a chess-engine-style analysis panel. Toggle **Analysis on** to
+highlight and rank the best moves after every turn, **Next move** makes the selected recommendation,
+and **Auto play** lets the AI play continuously. Fast, Strong, and Deep profiles trade thinking time
+for lookahead.
+
+The rules live in [`docs/engine.js`](docs/engine.js), a deterministic, UI-independent simulator
+shared by the browser and Node benchmarks. The AI in [`docs/ai.js`](docs/ai.js) combines exhaustive
+legal-move generation with line-building, space, connectivity, preview-ball evaluation, and bounded
+lookahead. Seeded games make changes directly comparable.
+
+```sh
+npm test
+npm run benchmark -- 10 greedy 500
+npm run benchmark -- 3 strong 500 100
+```
+
+The optimized evaluator sustains roughly 120,000–140,000 simulated positions per second on the
+development machine. Fast mode normally completes a full one-ply search in about 5 ms. The current
+75 ms Strong profile reached 1,006 points on seed 1 and was still alive at the 500-turn benchmark
+cap. Results are seed- and machine-dependent, so use the benchmark command above for comparisons on
+a fixed machine.
+
 # Dependencies
 
 Windows XP, 7

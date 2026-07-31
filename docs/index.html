@@ -25,6 +25,7 @@
       <div class="stats">
         <div class="stat"><span class="stat-label">Score</span><span id="score" class="stat-value">0</span></div>
         <div class="stat"><span class="stat-label">Best</span><span id="best" class="stat-value">0</span></div>
+        <div class="stat"><span class="stat-label">Move</span><span id="turn" class="stat-value">0</span></div>
       </div>
       <div class="controls">
         <button id="soundBtn" class="icon-btn" title="Toggle sound" aria-label="Toggle sound">🔊</button>
@@ -32,9 +33,35 @@
       </div>
     </header>
 
-    <div class="board-area">
-      <div id="board" class="board" role="grid" aria-label="Game board"></div>
-    </div>
+    <main class="game-layout">
+      <div class="board-area">
+        <div id="board" class="board" role="grid" aria-label="Game board"></div>
+      </div>
+
+      <aside class="engine-panel" aria-label="AI analysis">
+        <div class="engine-heading">
+          <span class="engine-kicker">Lines engine</span>
+          <span id="engineStatus" class="engine-status">Ready</span>
+        </div>
+        <div class="engine-best">
+          <span class="engine-label">Best move</span>
+          <strong id="engineMove">—</strong>
+          <span id="engineReason">Analyze the position to see the best move.</span>
+        </div>
+        <div class="engine-controls">
+          <select id="strengthSelect" aria-label="AI strength">
+            <option value="fast">Fast</option>
+            <option value="strong" selected>Strong</option>
+            <option value="deep">Deep</option>
+          </select>
+          <button id="analyzeBtn" class="btn secondary" aria-pressed="false">Analysis off</button>
+          <button id="stepBtn" class="btn">Next move</button>
+          <button id="autoplayBtn" class="btn auto">▶ Auto play</button>
+        </div>
+        <div id="engineStats" class="engine-stats"></div>
+        <div id="candidateList" class="candidate-list"></div>
+      </aside>
+    </main>
 
     <p class="hint">Click a ball, then click an empty tile to move it. Line up 5 or more balls of the same
       colour — in a row, column, or diagonal — to clear them and score. Every move that doesn't clear a
@@ -55,6 +82,8 @@
     </div>
   </div>
 
+  <script src="engine.js"></script>
+  <script src="ai.js"></script>
   <script src="game.js"></script>
 </body>
 </html>
