@@ -1,0 +1,10 @@
+{
+  "name": "lines-solitaire",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Lines Solitaire browser game, deterministic simulator, and AI",
+  "scripts": {
+    "test": "node test/engine.test.js && node test/ai.test.js",
+    "benchmark": "node tools/benchmark.js"
+  }
+}
